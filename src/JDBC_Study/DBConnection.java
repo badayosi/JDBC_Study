@@ -78,16 +78,16 @@ public class DBConnection {
 			
 			System.out.println("-- 최초 테이블 --");
 			showList(con);
+			
+			Student delStd = new Student("1234567");
+			deleteStudent(con, delStd);
+			showList(con);
+			
 			insertStudent(con, "1234567", "김개똥", "정보보안");
-			System.out.println("-- 1차 삽입 후 테이블 --");
 			showList(con);
 			
 			Student updateStd = new Student("1234567", "김개똥", "정보보안");
 			updateStudent(con, updateStd);
-			showList(con);
-			
-			Student delStd = new Student("1234567");
-			deleteStudent(con, delStd);
 			showList(con);
 			
 			/*
@@ -141,10 +141,14 @@ public class DBConnection {
 		}
 	}
 
-	private static void deleteStudent(Connection con2, Student delStd) {
-		String sql = "delete from student where id='1234567";
-		
-	}
+	private static void deleteStudent(Connection con, Student delStd) throws SQLException {
+		String sql = "delete from student where id=?";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, delStd.getId());
+		int res = pstmt.executeUpdate();
+		System.out.println(res + "개 삭제");
+		pstmt.close();
+	}	
 
 	private static List<Student> getStudents(Connection con2) throws SQLException {
 		ArrayList<Student> lists = new ArrayList<>();
