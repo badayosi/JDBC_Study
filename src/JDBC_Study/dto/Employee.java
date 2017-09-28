@@ -84,5 +84,8 @@ public class Employee {
 		return String.format("Employee [empNo=%s, empName=%s, title=%s, manager=%s, salary=%s, dno=%s, leaveOffic=%s]",
 				empNo, empName, title, manager, salary, dno, leaveOffic);
 	}
-
+	
+	public Object[] toArray(){
+		return new Object[] {empNo, empName, title, manager, salary, dno, leaveOffic};
+	}
 }

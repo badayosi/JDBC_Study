@@ -1,5 +1,6 @@
 package JDBC_Study;
 
+import java.awt.EventQueue;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -8,13 +9,21 @@ import JDBC_Study.dao.DepartmentDao;
 import JDBC_Study.dto.Department;
 import JDBC_Study.dao.EmployeeDao;
 import JDBC_Study.dto.Employee;
+import JDBC_Study.jdbc.CompanyManagerUI;
 
 public class TestMain {
 
 	public static void main(String[] args) {
-		testDepartmentDao();
-
-		testEmployeeDao();
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CompanyManagerUI frame = new CompanyManagerUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	private static void testEmployeeDao() {

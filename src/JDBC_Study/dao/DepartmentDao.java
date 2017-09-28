@@ -44,8 +44,6 @@ public class DepartmentDao {
 		} finally {
 			jdbcUtil.close(pstmt);
 		}
-		
-		
 		return lists;
 	}
 	
@@ -93,11 +91,12 @@ public class DepartmentDao {
 	}
 	
 	public void updateDepartment(Department dept){
-		sql = "update department set deptname=? where deptno=?";
+		sql = "update department set deptname=?, floor=? where deptno=?";
 		try {
 			pstmt = DBcon.getInstance().getConn().prepareStatement(sql);
 			pstmt.setString(1, dept.getDeptName());
-			pstmt.setInt(2, dept.getDeptNo());
+			pstmt.setInt(2, dept.getFloor());
+			pstmt.setInt(3, dept.getDeptNo());
 			
 			int res = pstmt.executeUpdate();
 			if(res<0){
